@@ -19,7 +19,7 @@ Hit Sphere::Intersection(const Ray& ray, int part) const
     double t1 = -1;
 
     double discriminant = ((b * b) - (4 * (a * c)));
-    if(discriminant >= 0){ //There is an intersection with the sphere
+    if(discriminant >= 0 && a > 0){ //There is an intersection with the sphere
         t0 = (sqrt(discriminant) - b) / (2 * a); //Calculate the (potentially) 2 intersection points w the sphere
         t1 = ((0 - b) - sqrt(discriminant)) / (2 * a);
     }
@@ -38,8 +38,10 @@ Hit Sphere::Intersection(const Ray& ray, int part) const
 
     if(t0 > 0 && t1 > 0){ //Intersection through the sphere
         h.dist = std::min(t0, t1); //Distance is the closer intersection point of the two
-    }else if(t0 == t1){ //Intersection is tangent to sphere
+    }else if(t0 > 0){
         h.dist = t0;
+    }else{
+        h.dist = t1;
     }
 
     

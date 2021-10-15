@@ -12,11 +12,11 @@ Hit Plane::Intersection(const Ray& ray, int part) const
     Hit h;
     //Calculate if the ray starts on the plane
     double dot_product_startpoint = dot(ray.endpoint - x1, normal);
-    if(dot_product_startpoint > small_t){
+    if(dot_product_startpoint < DBL_EPSILON){
         h.object = this;
     }else{ //Calculate if ray intersects the plane in some capacity
         double dot_product = dot(ray.direction, normal);
-        if(!(dot_product < small_t)){
+        if(!(fabs(dot_product) < DBL_EPSILON)){
             h.dist = ((0 - dot_product_startpoint) / dot_product);
 
             if(h.dist > 0){
