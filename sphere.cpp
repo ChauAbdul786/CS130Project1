@@ -51,7 +51,9 @@ Hit Sphere::Intersection(const Ray& ray, int part) const
 vec3 Sphere::Normal(const vec3& point, int part) const
 {
     vec3 normal;
-    TODO; // compute the normal direction
+    normal = (point - center).normalized(); //Because both the point and center are vec3,
+                                            //subtracting the two will result in a vector pointing in 
+                                            //the right direction. From there we just have to normalize.
     return normal;
 }
 
